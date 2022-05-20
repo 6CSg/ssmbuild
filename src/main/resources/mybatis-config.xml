@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--Mybatis核心配置文件中的标签顺序
+    "(properties?,settings?,typeAliases?,typeHandlers?
+    ,objectFactory?,objectWrapperFactory?,reflectorFactory?,
+    plugins?,environments?,databaseIdProvider?,mappers?)".-->
+
+
+    <!--直接将jdbc,properties引入-->
+    <properties resource="jdbc.properties"/>
+    <!--设置类型别名,再实体类对象的映射配置文件中可以直接使用,类型别名不区分大小写-->
+    <typeAliases>
+        <!--package:以包为单位，将里面的所有类型设置默认类型别名，即类名且不区分大小写-->
+        <package name="com.csg.ssm.pojo"/>
+    </typeAliases>
+    <!--设置连接数据库的环境，environments用来配置多个连接数据库的环境,default是用来设置默认使用的环境的id-->
+    <environments default="development">
+        <!--id表示连接数据库的环境的唯一表示，不能重复-->
+        <environment id="development">
+            <!--transactionManager：设置事务管理器，type是事务管理的方式，还有一个是MANAGED,
+            JDBC表示当前环境中，执行sql时，使用的是JDBC原生的事务管理方式，事务的提交或回滚需要手动处理
+            MANAGED：表示被管理，如spring-->
+            <transactionManager type="JDBC"/>
+            <!--dataSource:配置数据源，type="POOLED|UNPOOLED|JNDL"
+            POOLED:表示使用数据库连接池缓存数据库连接
+            UNPOOLED:表示不使用数据库连接池缓存数据库连接
+            JNDI：表示使用上下文中的数据源
+            -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射文件-->
+    <mappers>
+        <!--<mapper resource="mappers/UserMapper.xml"/>-->
+
+
+        <!--以包为单位引入配置文件
+        1.mapper接口所在的包要和映射文件的包结构一至
+        2.mapper接口要和映射文件的名字一直
+        -->
+        <package name="com.csg.ssm.mapper"></package>
+    </mappers>
+</configuration>

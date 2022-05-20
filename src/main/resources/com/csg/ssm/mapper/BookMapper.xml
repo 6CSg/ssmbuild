@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csg.ssm.mapper.BookMapper">
+    <!-- int addBook(Books book);-->
+    <insert id="addBook" parameterType="Books">
+        insert into ssmbuild.books values (null,#{bookName},#{bookCounts},#{detail})
+    </insert>
+    <!--int deleteBook(int id);-->
+    <delete id="deleteBook" parameterType="int">
+        delete from books where bookID = #{bookId}
+    </delete>
+    <!-- int updateBook(Books book);-->
+    <update id="updateBook" parameterType="Books">
+        update ssmbuild.books
+        set bookName = #{bookName},bookCounts = #{bookCounts},detail = #{detail}
+         where bookID = #{bookID}
+    </update>
+    <!-- Books selectBookById(int id);-->
+    <select id="selectBookById" resultType="Books">
+      select * from ssmbuild.books
+      where bookID = #{bookId}
+   </select>
+    <!-- List<Books> selectAllBooks();-->
+    <select id="selectAllBooks" resultType="Books">
+    SELECT * from ssmbuild.books
+</select>
+    <!--Books selectBookName(@Param("bookName") String bookName);-->
+    <select id="selectBookName" resultType="Books">
+        select * from ssmbuild.books
+        where bookName=#{bookName}
+    </select>
+</mapper>

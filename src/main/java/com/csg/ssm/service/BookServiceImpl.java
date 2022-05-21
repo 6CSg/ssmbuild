@@ -38,4 +38,8 @@ public class BookServiceImpl implements BookService {
     public Books selectBookByName(String bookName) {
         return bookMapper.selectBookName(bookName);
     }
+
+    public int deleteAllBooks() {
+        return 88;
+    }
 }

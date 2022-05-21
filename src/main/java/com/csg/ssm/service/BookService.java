@@ -12,4 +12,5 @@ public interface BookService {
     Books selectBookById(int id);
     List<Books> selectAllBooks();
     Books selectBookByName(String bookName);
+    int deleteAllBooks();
 }
